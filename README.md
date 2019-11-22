@@ -38,6 +38,18 @@ class Example extends React.Component {
 }
 ```
 
+## Props
+
+Common props you may want to specify include:
+
+- `size` - number of input boxes
+- `value` - control the current value 
+- `isPassword` - apply password dots to hide input data
+- `onlyNumber` - allow only numbers
+- `isConfirmInput` - allow use the input box component two times in screent as a confirm data input
+- `onChange` - subscribe to change events
+
+
 ## License
 
 MIT © [lucasga](https://github.com/lucasga)
