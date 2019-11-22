@@ -6,7 +6,7 @@
 
 ## Example
 
-![]react-individual-input-box-example-gif.gif
+![](react-individual-input-box-example-gif.gif)
 
 
 
