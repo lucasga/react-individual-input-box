@@ -4,6 +4,12 @@
 
 [![NPM](https://img.shields.io/npm/v/react-individual-input-box.svg)](https://www.npmjs.com/package/react-individual-input-box) [![JavaScript Style Guide](https://img.shields.io/badge/code_style-standard-brightgreen.svg)](https://standardjs.com)
 
+## Example
+
+![](react-individual-input-box-eaxmple-gif.gif)
+
+
+
 ## Install
 
 ```bash
