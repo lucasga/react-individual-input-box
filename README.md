@@ -24,6 +24,7 @@ class Example extends React.Component {
         size={4}
         value={this.value}
         onChange={() => this.onChange()}
+        isPassword
         onlyNumbers
       />
     );
