@@ -61,6 +61,9 @@ export const InputBox = observer((props: IInputBoxProps) => {
                   return;
                 }
               });
+              if (e.currentTarget.value.length > 1) {
+                e.currentTarget.value = e.currentTarget.value[0];
+              }
             }
             if (e.currentTarget.value && e.currentTarget.value !== " ") {
               targetValue =
