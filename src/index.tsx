@@ -68,8 +68,8 @@ export const InputBox = observer((props: IInputBoxProps) => {
             if (e.currentTarget.value && e.currentTarget.value !== " ") {
               targetValue =
                 (props.onlyNumber
-                  ? numberMask(e.currentTarget.value)
-                  : e.currentTarget.value) || "";
+                  ? numberMask(e.currentTarget.value[0])
+                  : e.currentTarget.value[0]) || "";
               if (targetValue && i < props.size - 1) {
                 inputRef.current.form[
                   (props.isConfirmInput ? i + props.size : i) + 1
