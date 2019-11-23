@@ -17,6 +17,9 @@ export const InputBox = observer((props: IInputBoxProps) => {
   const inputRef = useRef<any>(null);
 
   useEffect(() => {
+    if (arrayValue.length === 0) {
+      initArray();
+    }
     if (
       arrayValue.length === 0 &&
       props.value &&
@@ -25,6 +28,12 @@ export const InputBox = observer((props: IInputBoxProps) => {
       setArrayValue(convertValueToArray());
     }
   }, [props.value]);
+
+  const initArray = () => {
+    for (let i = 0; i < props.size; i++) {
+      arrayValue.push("");
+    }
+  };
 
   const convertValueToArray = () => {
     const stringToArray: string[] = [];
@@ -47,10 +56,23 @@ export const InputBox = observer((props: IInputBoxProps) => {
         <input
           key={i}
           type={props.isPassword ? "password" : "tel"}
-          value={arrayValue[i] === " " ? "" : arrayValue[i]}
+          value={
+            arrayValue[i] === " "
+              ? ""
+              : props.onlyNumber && arrayValue[i]
+              ? numberMask(arrayValue[i])
+              : arrayValue[i]
+          }
           onChange={e => {
             let targetValue = "";
+            let focusNext = true;
             if (e.currentTarget.value && arrayValue[i]) {
+              if (
+                props.onlyNumber &&
+                numberMask(e.currentTarget.value).length < 2
+              ) {
+                focusNext = false;
+              }
               Object.values(
                 props.onlyNumber
                   ? numberMask(e.currentTarget.value)
@@ -61,7 +83,11 @@ export const InputBox = observer((props: IInputBoxProps) => {
                   return;
                 }
               });
-              if (e.currentTarget.value.length > 1) {
+              if (
+                e.currentTarget.value.length > 1 &&
+                ((props.onlyNumber && numberMask(e.currentTarget.value[0])) ||
+                  !props.onlyNumber)
+              ) {
                 e.currentTarget.value = e.currentTarget.value[0];
               }
             }
@@ -70,7 +96,7 @@ export const InputBox = observer((props: IInputBoxProps) => {
                 (props.onlyNumber
                   ? numberMask(e.currentTarget.value)
                   : e.currentTarget.value) || "";
-              if (targetValue && i < props.size - 1) {
+              if (targetValue && i < props.size - 1 && focusNext) {
                 inputRef.current.form[
                   (props.isConfirmInput ? i + props.size : i) + 1
                 ].focus();
@@ -80,6 +106,7 @@ export const InputBox = observer((props: IInputBoxProps) => {
                 (props.isConfirmInput ? i + props.size : i) - 1
               ].focus();
             }
+
             handleChange(targetValue || " ", i);
           }}
           onKeyDown={e => {
